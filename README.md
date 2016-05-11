@@ -1,1 +1,9 @@
 # Node.js-Documentation
+Event Loops:
+
+callbacks hints at Javascript's concurrency model, which is very different from other programming languages like Java or C++.
+JavaScript is a language built to run in an event loop. It's called an event loop because JavaScript interpreters run in a loop that looks something like this. So while wait for event process event. This loop has numerous interesting semantics. First of all, the loop is single threaded,so only one event handler can run at any given time. Second, this loop provides an effective way to break up long running operations, like network I/O. You could simply add an event handler that waits for completed network I/O. Once the network I/O completes, it gets added to the queue of events to be processed. Therefore, instead of thinking of JavaScript as an imperative
+programming language like Java or C++, it helps to think of JavaScript as running in a loop that executes event handlers that can register other event handlers. 
+
+ In Node.js, file I/O and network I/O are typically asynchronous. In particular, you will notice that every MongoDB operation that you'll use in this course uses callbacks, and is thus asynchronous. This enables Node.js to be highly concurrent by default. You don't have to worry about setting up multiple threads to make sure you're not blocking the CPU waiting on a database operation. Many Node.js developers find callbacks to be cumbersome. There are numerous MPM packages that provide syntactic sugar on top of callbacks, such as async and the various promises libraries. However, callbacks are handy for determining if your code is doing too much I/O. If you have
+12 levels of nested callbacks, the problem is probably not the callbacks, but that you have a very complex function that's very difficult to test.
